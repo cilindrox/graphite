@@ -1,0 +1,53 @@
+{
+  "server": {
+    "app": {
+      "rkey": "pager:pusher"
+    },
+    "load": {
+      "sampleInterval": 1000
+    }
+  },
+  "connections": [
+    {
+      "port": 3000,
+      "labels": ["api"],
+      "load": {
+        "maxHeapUsedBytes": 1073741824,
+        "maxRssBytes": 1610612736,
+        "maxEventLoopDelay": 1000
+      }
+    }
+  ],
+  "plugins": [
+    {
+      "good": {
+        "opsInterval": 15000,
+        "requestHeaders": true,
+        "requestPayload": true,
+        "responsePayload": true,
+        "reporters": [
+          {
+            "reporter": "good-console",
+            "events": {
+              "error": "*",
+              "request": "*",
+              "log": "*",
+              "response": "*",
+              "wreck": "*"
+            }
+          }
+        ],
+        "filter": {
+          "email": "censor",
+          "password": "censor"
+        }
+      }
+    },
+    {
+      "scooter": null
+    },
+    {
+      "./graphite": { "mutation": false }
+    }
+  ]
+}
